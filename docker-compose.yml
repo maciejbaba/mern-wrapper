@@ -25,7 +25,7 @@ services:
       - "3500:3500"
     environment:
       NODE_ENV: development
-      DATABASE_URI: mongodb://admin:password123@mongodb:27018/ecommerce?authSource=admin
+      DATABASE_URI: mongodb://admin:password123@mongodb:27017/ecommerce?authSource=admin
       ACCESS_TOKEN_SECRET: your-access-token-secret-key-here
       REFRESH_TOKEN_SECRET: your-refresh-token-secret-key-here
     depends_on:
