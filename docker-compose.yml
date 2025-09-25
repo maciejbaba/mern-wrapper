@@ -2,9 +2,9 @@ services:
   mongodb:
     image: mongo:7
     container_name: mern-mongodb
-    restart: unless-stopped
+    restart: always
     ports:
-      - "27017:27017"
+      - "27018:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: password123
@@ -20,12 +20,12 @@ services:
       context: ./mern-ecommerce-api
       dockerfile: Dockerfile
     container_name: mern-api
-    restart: unless-stopped
+    restart: always
     ports:
       - "3500:3500"
     environment:
       NODE_ENV: development
-      DATABASE_URI: mongodb://admin:password123@mongodb:27017/ecommerce?authSource=admin
+      DATABASE_URI: mongodb://admin:password123@mongodb:27018/ecommerce?authSource=admin
       ACCESS_TOKEN_SECRET: your-access-token-secret-key-here
       REFRESH_TOKEN_SECRET: your-refresh-token-secret-key-here
     depends_on:
@@ -41,7 +41,7 @@ services:
       context: ./mern-ecommerce
       dockerfile: Dockerfile
     container_name: mern-frontend
-    restart: unless-stopped
+    restart: always
     ports:
       - "5173:5173"
     environment:
