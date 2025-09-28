@@ -3,13 +3,19 @@
   "version": "1.0.0",
   "description": "MERN stack application with Docker support",
   "scripts": {
-    "dev": "docker-compose up --build",
-    "dev:down": "docker-compose down",
-    "prod": "docker-compose -f docker-compose.prod.yml up --build",
-    "prod:down": "docker-compose -f docker-compose.prod.yml down",
+    "dev": "docker compose up --build",
+    "dev:down": "docker compose down",
+    "prod": "docker compose -f docker-compose.prod.yml up --build",
+    "prod:down": "docker compose -f docker-compose.prod.yml down",
     "clean": "docker system prune -a --volumes"
   },
-  "keywords": ["mern", "docker", "react", "node", "mongodb"],
+  "keywords": [
+    "mern",
+    "docker",
+    "react",
+    "node",
+    "mongodb"
+  ],
   "author": "",
   "license": "ISC"
 }
