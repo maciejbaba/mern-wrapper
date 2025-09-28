@@ -42,7 +42,7 @@ services:
     ports:
       - "5173:5173"
     environment:
-      VITE_API_URL: https://mern.maciejbaba.dev/api
+      VITE_API_URL: http://api:3500
     depends_on:
       - api
     networks:
