@@ -40,7 +40,7 @@ services:
     container_name: mern-frontend-prod
     restart: always
     ports:
-      - "80:80"
+      - "5173:5173"
     environment:
       VITE_API_URL: https://mern.maciejbaba.dev/api
     depends_on:
@@ -50,6 +50,7 @@ services:
 
 volumes:
   mongodb_data_prod:
+
 
 networks:
   mern-network-prod:
