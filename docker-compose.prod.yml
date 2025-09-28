@@ -1,0 +1,56 @@
+services:
+  mongodb:
+    image: mongo:7
+    container_name: mern-mongodb-prod
+    restart: always
+    ports:
+      - "27018:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_DATABASE: ecommerce
+    volumes:
+      - mongodb_data_prod:/data/db
+      - ./mongo-init:/docker-entrypoint-initdb.d
+    networks:
+      - mern-network-prod
+
+  api:
+    build:
+      context: ./mern-ecommerce-api
+      dockerfile: Dockerfile.prod
+    container_name: mern-api-prod
+    restart: always
+    ports:
+      - "3500:3500"
+    environment:
+      NODE_ENV: production
+      DATABASE_URI: mongodb://admin:password123@mongodb:27017/ecommerce?authSource=admin
+      ACCESS_TOKEN_SECRET: your-access-token-secret-key-here
+      REFRESH_TOKEN_SECRET: your-refresh-token-secret-key-here
+    depends_on:
+      - mongodb
+    networks:
+      - mern-network-prod
+
+  frontend:
+    build:
+      context: ./mern-ecommerce
+      dockerfile: Dockerfile.prod
+    container_name: mern-frontend-prod
+    restart: always
+    ports:
+      - "80:80"
+    environment:
+      VITE_API_URL: https://mern.maciejbaba.dev/api
+    depends_on:
+      - api
+    networks:
+      - mern-network-prod
+
+volumes:
+  mongodb_data_prod:
+
+networks:
+  mern-network-prod:
+    driver: bridge
