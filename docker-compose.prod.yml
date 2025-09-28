@@ -40,7 +40,7 @@ services:
     container_name: mern-frontend-prod
     restart: always
     ports:
-      - "5173:5173"
+      - "3000:3000"
     environment:
       VITE_API_URL: http://api:3500
     depends_on:
